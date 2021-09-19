@@ -227,7 +227,7 @@ char *validador;
 
 void ordenacaoVetor(){
 	
-	int aux_idUsuario,contador=0,/*vacina*/ j=0;
+	int aux_idUsuario,contador=0, aux_vacina, j=0;
 	char Aux_nome[50], auxEmail[50], auxSexo[10],auxEndereco[150];
 	double auxAltura;
 	
@@ -251,6 +251,10 @@ void ordenacaoVetor(){
 				strcpy(auxSexo,sexo[i]);
 				strcpy(sexo[i],sexo[j]);
 				strcpy(sexo[j],auxSexo);
+				
+				aux_vacina = vacina[i];
+				vacina[i] = vacina[j];
+				vacina[j] = aux_vacina;
 				
 				strcpy(auxEndereco,endereco[i]);
 				strcpy(endereco[i],endereco[j]);
