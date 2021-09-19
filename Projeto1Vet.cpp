@@ -4,7 +4,7 @@
 #include<stdlib.h>
 #include<time.h>
 
-int idUsuario[1000], vacina[1000], i=0, opc;
+int idUsuario[1000], vacina[1000], i=0, opc, cont=0;
 char nome[1000][50], eMail[1000][50], sexo[1000][10], endereco[1000][150];
 double altura[1000];
 
@@ -16,12 +16,17 @@ void cadastrarSexo();
 void cadastrarAltura();
 void cadastrarVacina();
 void cadastrarEmail();
+void ordenacaoVetor();
+void cadastrarEndereco();
+void pesquisar();
+void backup();
+int buscaBinariaId(int id[], int tamamnho, int x);
 //int idUsuario[i], int vacina[i],nome[i], eMail[i], sexo[i], endereco[i], altura[i]//
 
 
 int main(){
-	int cont=0;
-	do{	
+	
+	do{
 		opc = menu();
 		switch(opc){
 			case 1:
@@ -34,40 +39,46 @@ int main(){
 				cadastrarEmail();
 				cadastrarSexo();
 				cadastrarVacina();
-				cadastrarAltura();								
-				i++;				
-				cont ++;
-				printf("\n\t\t\tCadastro realizado com sucesso!!!\n\n");
+				cadastrarEndereco();
+				cadastrarAltura();
+				i++;
+				cont++;
+				printf("\n\t\t\tCadastro realizado com sucesso!!!\n\n");				
 				system("pause");
-				break;	
-			case 2:	
+				
+				break;
+				
+			case 2:
+					ordenacaoVetor();
 					system("cls");
 					printf("\n============================================================================================\n");
 					printf("\t\t\tUsuarios Cadastrados");
-					printf("\n============================================================================================\n");			
-				for(i=0;i<cont;i++){					
-					printf("\n\tID Usuario...........................................: %i\n", idUsuario[i] );			
+					printf("\n============================================================================================\n");
+				for(i=0;i<cont;i++){
+					printf("\n\tID Usuario...........................................: %i\n", idUsuario[i] );
 					printf("\tNome.................................................: %s", nome[i]);
 					printf("\tEmail cadastrado.....................................: %s\n",eMail[i]);
 					printf("\tSexo.................................................: %s\n", sexo[i]);
-					printf("\tTomou vacina?........................................: ");					
-					if(vacina[i] == 1){ 
+					printf("\tTomou vacina?........................................: ");
+					if(vacina[i] == 1){
 						printf("SIM\n");
 					}else{
-						printf("NAO\n");					
-					}				
-					printf("\tAltura...............................................: %i = %.2f\n", i, altura[i]);				
+						printf("NAO\n");
+					}
+					printf("\tEndereco.............................................: %s", endereco[i]);
+					printf("\tAltura...............................................:  %.2f\n", altura[i]);
 					printf("\n");
-				}				
-			
+				}
+
 			system ("pause");
 				break;
-			case 3: 
+			case 3:
 				system("cls");
 				printf("\n============================================================================================\n");
 				printf("\t\t\tPesquisar Usuarios Cadastrados");
 				printf("\n============================================================================================\n");
-					//insira aqui a função Pesquisar por id e por e-mail//
+				pesquisar();
+						
 			system ("pause");
 				break;
 			case 4:
@@ -84,33 +95,33 @@ int main(){
 				printf("\t\t\tEditar Usuarios Cadastrados");
 				printf("\n============================================================================================\n");
 					//insira aqui a função Editar//
-			system ("pause");			
-				break;			
-			case 6:			
+			system ("pause");
+				break;
+			case 6:
                system("cls");
 				printf("\n============================================================================================\n");
 				printf("\t\t\tRealizar Backup");
 				printf("\n============================================================================================\n");
-					//insira aqui a função Backup//
+					backup();
 			system ("pause");
 				break;
-			case 7 :			
+			case 7 :
                system("cls");
 				printf("\n============================================================================================\n");
 				printf("\t\t\tRestaurar Backup");
 				printf("\n============================================================================================\n");
 					//insira aqui a função restaurar Backup//
 			system ("pause");
-				break;							
+				break;
 		}
-	
+
 	}while(opc !=8);
-	
-	return 0; 	
+
+	return 0;
 }
 int menu(){
 system ("cls");
-	int opcao=0;		
+	int opcao=0;
 	do{
 		system ("cls");
 		printf("\n==============================================================\n");
@@ -120,27 +131,27 @@ system ("cls");
 		printf(" [2]\tListar Usuarios Cadastrados\n");
 		printf(" [3]\tPesquisar Usuario\n");
 		printf(" [4]\tExcluir Cadastro\n");
-		printf(" [5]\tEditar Cadastro\n");		
+		printf(" [5]\tEditar Cadastro\n");
 		printf(" [6]\tBackup\n");
-		printf(" [7]\tSair\n");			
-		printf("\nOpcao desejada: ");	
+		printf(" [7]\tSair\n");
+		printf("\nOpcao desejada: ");
 		scanf("%d", &opcao);
 		getchar();
-		printf("\n");	
+		printf("\n");
 		if(opcao > 7 || opcao < 1){
 			printf("\n\tATENCAO!!!\n\n");
 			printf("\tOpcao Invalida\n\n");
 			system("pause");
-		}			
-	}while(opcao == 0);	
+		}
+	}while(opcao == 0);
 return opcao;
 }
 void cadastrarId(){
 	int idTemp;
 	do{
 		srand(time(NULL));
-		idTemp = rand()%10000;
-			
+		idTemp = rand()%100;
+
 	}while (idTemp == idUsuario[i]);
 
 	idUsuario[i] = idTemp;
@@ -151,51 +162,236 @@ void cadastrarNome(){
 		printf("Informe seu nome.............................................: ");
    		fgets(nome[i],sizeof(nome[i]), stdin);
 		if (strlen(nome[i])== 1){
-			
+
 			printf("Este campo nao pode ser vazio\n");
 		}
 	}while(strlen(nome[i])== 1);
 }
-void cadastrarSexo(){ 
+void cadastrarSexo(){
 	do{
-		printf("Informe sexo: Masculino, Feminino ou Nao-declarado...........: ");		
+		printf("Informe sexo: Masculino, Feminino ou Nao-declarado...........: ");
    		scanf("%s", sexo[i]);
 		fflush(stdin);
-   		strupr(sexo[i]); //função que converte a string para maiúsculo. 
+   		strupr(sexo[i]); //função que converte a string para maiúsculo.
 		if(strcmp(sexo[i],"MASCULINO")!=0 && strcmp(sexo[i],"FEMININO")!=0 && strcmp(sexo[i], "NAO-DECLARADO")!=0){
-			printf("Erro, opcao invalida\n");		
+			printf("Erro, opcao invalida\n");
 		}
 	}while(strcmp(sexo[i],"MASCULINO")!=0 && strcmp(sexo[i],"FEMININO")!=0 && strcmp(sexo[i], "NAO-DECLARADO")!=0);
 }
-void cadastrarAltura(){	
+
+void cadastrarEndereco(){
+	fflush(stdin);
+	do{
+		printf("Informe seu Endereco.........................................: ");
+   		fgets(endereco[i],sizeof(endereco[i]), stdin);
+		if (strlen(endereco[i])== 1){
+
+			printf("Este campo nao pode ser vazio\n");
+		}
+	}while(strlen(endereco[i])== 1);
+}
+
+
+void cadastrarAltura(){
 	do{
 		printf("Informe sua altura separada por '.'ponto: ex: 1.60...........: ");
-		scanf("%lf", &altura[i]);		
+		scanf("%lf", &altura[i]);
 		if (altura[i] < 1 || altura[i] > 2){
 			printf("Erro, altura invalida\n");
-			printf("valor não pode ser superior a 2.00 mts\n");			
-		}		
-	}while(altura[i] < 1 || altura[i] > 2);	
+			printf("valor não pode ser superior a 2.00 mts\n");
+		}
+	}while(altura[i] < 1 || altura[i] > 2);
 }
-void cadastrarVacina(){	
+void cadastrarVacina(){
 	do{
 		printf("Tomou a vacina? digite [1] para SIM ou [2] para NAO..........: ");
-		scanf("%d", &vacina[i]);		
+		scanf("%d", &vacina[i]);
 		if (vacina[i] < 1 || vacina[i] > 2){
-			printf("Erro, opcao invalida\n");			
-		}		
-	}while(vacina[i] < 1 || vacina[i] > 2);		
+			printf("Erro, opcao invalida\n");
+		}
+	}while(vacina[i] < 1 || vacina[i] > 2);
 }
-void cadastrarEmail(){	
+void cadastrarEmail(){
+
 char *validador;
 	do{
 		printf("Informe o seu e-mail.........................................: ");
-		scanf("%s", eMail[i]);	
+		scanf("%s", eMail[i]);
 		strlwr(eMail[i]); //função que converte a string para minusculo.
 		validador = strchr(eMail[i],'@'); //função que percorre a string comparando o caractere @ com cada caractere da string, caso não encontre retorna NULL.
 		if(validador == NULL){
-			printf("digite um e-mail valido\n");	
+			printf("digite um e-mail valido\n");
 		}
 	}while(validador == NULL);
+}
 
+void ordenacaoVetor(){
+	
+	int aux_idUsuario,contador=0,/*vacina*/ j=0;
+	char Aux_nome[50], auxEmail[50], auxSexo[10],auxEndereco[150];
+	double auxAltura;
+	
+	
+	for(i = 0; i < cont; i++){
+		for(j = i+1; j < cont; j++){
+			if(idUsuario[i] > idUsuario[j]){
+				
+				aux_idUsuario = idUsuario[i];
+				idUsuario[i] = idUsuario[j];
+				idUsuario[j] = aux_idUsuario;
+				
+				strcpy(Aux_nome,nome[i]);// strcpy funcao da biblioteca string.h para copiar um vetor de string para outro.
+				strcpy(nome[i],nome[j]);
+				strcpy(nome[j],Aux_nome);
+				
+				strcpy(auxEmail,eMail[i]); 
+				strcpy(eMail[i],eMail[j]);
+				strcpy(eMail[j],auxEmail);
+				
+				strcpy(auxSexo,sexo[i]);
+				strcpy(sexo[i],sexo[j]);
+				strcpy(sexo[j],auxSexo);
+				
+				strcpy(auxEndereco,endereco[i]);
+				strcpy(endereco[i],endereco[j]);
+				strcpy(endereco[j],auxEndereco);
+				
+				auxAltura = altura[i];
+				altura[i] = altura[j];
+				altura[j] = auxAltura;								
+			}	
+		}
+	}			
+}
+
+void pesquisar(){
+	
+	int idPesquisado, opcao, resultado=0;
+	do{
+		printf("\nInforme a opcao de pesquisa:\n[1] ID\n[2] EMAIL\n");
+		scanf("%d",&opcao);
+		printf("\nOpcao desejada: %d\n\n",opcao);
+		
+		if(opcao < 1 || opcao > 2){
+			printf("Erro, opcao invalida\n\n");			
+		}		
+	}while(opcao < 1 || opcao > 2);
+	
+	
+	switch(opcao){
+		case 1:
+			printf("Digite o Id que deseja procurar: ");
+			scanf("%d", &idPesquisado);
+			resultado = buscaBinariaId(idUsuario, cont,idPesquisado);
+			
+			if(resultado != -1){
+				printf("Valor %d foi encontrado na posicao %d que tem o valor %d\n",idPesquisado,resultado, idUsuario[resultado]);
+				printf("\n\tID Usuario...........................................: %i\n", idUsuario[resultado] );
+				printf("\tNome.................................................: %s", nome[resultado]);
+				printf("\tEmail cadastrado.....................................: %s\n",eMail[resultado]);
+				printf("\tSexo.................................................: %s\n", sexo[resultado]);
+				printf("\tTomou vacina?........................................: ");
+				if(vacina[i] == 1){
+					printf("SIM\n");
+				}else{
+					printf("NAO\n");
+				}
+				printf("\tEndereco.............................................: %s", endereco[resultado]);
+				printf("\tAltura...............................................:  %.2f\n", altura[resultado]);
+				printf("\n");
+			}else{
+			printf("Valor nao encontrado\n");	
+			break;			
+		case 2:
+			break;
+		}
+		}
+	}
+int buscaBinariaId(int id[1000], int tamanho, int x){
+	int inicio = 0, fim = tamanho - 1, meio;
+	
+	while(inicio <= fim){
+		meio = (inicio + fim) / 2;
+		
+		if(x==id[meio]){
+			return meio;
+		}else if(x < id[meio]){
+			fim = meio - 1;
+			
+		}else{
+			inicio = meio + 1;			
+		}		
+	}
+	return -1;	
+}
+
+void backup(){
+	
+	/*int idUsuario[1000], vacina[1000], i=0, opc, cont=0;
+	char nome[1000][50], eMail[1000][50], sexo[1000][10], endereco[1000][150];
+	double altura[1000];*/		
+	
+	int bkp_idUsuario[1000], bkp_vacina[1000];
+	char bkp_nome[1000][50], bkp_eMail[1000][50], bkp_sexo[1000][10], bkp_endereco[1000][150];
+	double bkp_altura[1000];
+	
+	int opcao, i;
+	
+	do{
+		printf("[1] Sim\n[2] Nao\n", opcao);/* imprime na tela a opcao para o usuario*/	
+		scanf("%d", &opcao);/*le a opcao desejada*/
+		
+		printf("Opcao desejada: %d\n", opcao);	/* imprime a opcao desejada */	
+		
+		if(opcao < 1 || opcao > 2){/* valida a opcao informada pelo usuario*/
+			printf("\nErro, opcao invalida\n\n");/*imprime erro casa a opcao seja diferente da informada*/			
+		}		
+		
+	}while(opcao < 1 || opcao > 2);	/* estrutura de repeticao que executa pelo menos uma vez e enquanto as condições forem verdadeira*/
+	
+	if(opcao == 1){
+		if(idUsuario[i]!=NULL){
+			for(i = 0; i < 1000; i++){
+				bkp_idUsuario[i] = idUsuario[i];
+				strcpy(bkp_nome[i],nome[i]);
+				strcpy(bkp_eMail[i], eMail[i]);
+				strcpy(bkp_sexo[i],sexo[i]);
+				bkp_vacina[i] = vacina[i];
+				strcpy(bkp_endereco[i],endereco[i]);
+				bkp_altura[i] = altura[i];		
+		}	
+		printf("\n==============================================================\n");
+		printf("\tBackup realizado com sucesso");
+		printf("\n==============================================================\n");
+			
+		}else{
+			printf("\n==============================================================\n");
+			printf("\tBase de dados vazia, Backup nao realizado ");
+			printf("\n==============================================================\n");			
+		}		
+	}else if (opcao == 2){
+		printf("\n==============================================================\n");
+		printf("\tBackup nao realizado ");
+		printf("\n==============================================================\n");		
+	}
+	
+	for(i = 0; i < cont; i++){	
+	
+		printf("\n\tID Usuario...........................................: %i\n", bkp_idUsuario[i] );
+		printf("\tNome.................................................: %s\n", bkp_nome[i]);
+		printf("\tEmail cadastrado.....................................: %s",bkp_eMail[i]);
+		printf("\n\tSexo.................................................: %s\n", bkp_sexo[i]);
+		printf("\tTomou vacina?........................................: ");
+		
+		if(bkp_vacina[i] == 1){
+			printf("SIM\n");
+		}else if(bkp_vacina[i] == 2){
+			printf("NAO\n");
+			}else{
+				printf(" \n");		
+			}	
+		printf("\tEndereco.............................................: %s\n", bkp_endereco[i]);
+		printf("\tAltura...............................................:  %.2f", bkp_altura[i]);
+		printf("\n");		
+	}
 }
