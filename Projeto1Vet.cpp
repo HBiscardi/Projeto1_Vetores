@@ -4,7 +4,7 @@
 #include<stdlib.h>
 #include<time.h>
 
-int idUsuario[1000], vacina[1000], i=0, opc, cont=0;
+int idUsuario[1000], vacina[1000], i=0, opc, cont=0,x=0;
 char nome[1000][50], eMail[1000][50], sexo[1000][10], endereco[1000][150];
 double altura[1000];
 
@@ -55,21 +55,23 @@ int main(){
 					printf("\t\t\tUsuarios Cadastrados");
 					printf("\n============================================================================================\n");
 				for(i=0;i<cont;i++){
-					printf("\n\tID Usuario...........................................: %i\n", idUsuario[i] );
-					printf("\tNome.................................................: %s", nome[i]);
-					printf("\tEmail cadastrado.....................................: %s\n",eMail[i]);
-					printf("\tSexo.................................................: %s\n", sexo[i]);
-					printf("\tTomou vacina?........................................: ");
-					if(vacina[i] == 1){
-						printf("SIM\n");
-					}else{
-						printf("NAO\n");
-					}
-					printf("\tEndereco.............................................: %s", endereco[i]);
-					printf("\tAltura...............................................:  %.2f\n", altura[i]);
-					printf("\n");
+					if(idUsuario[i]!= 0){
+						printf("\n\tID Usuario...........................................: %i\n", idUsuario[i] );
+						printf("\tNome.................................................: %s", nome[i]);
+						printf("\tEmail cadastrado.....................................: %s\n",eMail[i]);
+						printf("\tSexo.................................................: %s\n", sexo[i]);
+						printf("\tTomou vacina?........................................: ");
+					
+						if(vacina[i] == 1){
+							printf("SIM\n");
+						}else{
+							printf("NAO\n");
+						}
+						printf("\tEndereco.............................................: %s", endereco[i]);
+						printf("\tAltura...............................................:  %.2f\n", altura[i]);
+						printf("\n");					
+					}					
 				}
-
 			system ("pause");
 				break;
 			case 3:
@@ -339,19 +341,20 @@ void backup(){
 	char bkp_nome[1000][50], bkp_eMail[1000][50], bkp_sexo[1000][10], bkp_endereco[1000][150];
 	double bkp_altura[1000];
 	
-	int opcao, i;
+	int opcao=0, i=0;
 	
 	do{
-		printf("[1] Sim\n[2] Nao\n", opcao);/* imprime na tela a opcao para o usuario*/	
+		printf("[1] Sim\n[2] Nao\n[3] Restaurar backup\n", opcao);/* imprime na tela a opcao para o usuario*/	
 		scanf("%d", &opcao);/*le a opcao desejada*/
 		
 		printf("Opcao desejada: %d\n", opcao);	/* imprime a opcao desejada */	
 		
-		if(opcao < 1 || opcao > 2){/* valida a opcao informada pelo usuario*/
+		if(opcao < 1 || opcao > 3){/* valida a opcao informada pelo usuario*/
 			printf("\nErro, opcao invalida\n\n");/*imprime erro casa a opcao seja diferente da informada*/			
 		}		
 		
-	}while(opcao < 1 || opcao > 2);	/* estrutura de repeticao que executa pelo menos uma vez e enquanto as condições forem verdadeira*/
+	}while(opcao < 1 || opcao > 3);	/* estrutura de repeticao que executa pelo menos uma vez e enquanto as condições forem verdadeira*/
+	
 	
 	if(opcao == 1){
 		if(idUsuario[i]!=NULL){
@@ -362,10 +365,11 @@ void backup(){
 				strcpy(bkp_sexo[i],sexo[i]);
 				bkp_vacina[i] = vacina[i];
 				strcpy(bkp_endereco[i],endereco[i]);
-				bkp_altura[i] = altura[i];		
+				bkp_altura[i] = altura[i];
+				x++;/* contador para verificar se existe backup	*/
 		}	
 		printf("\n==============================================================\n");
-		printf("\tBackup realizado com sucesso");
+		printf("\tBackup realizado com sucesso");//imprime mensagem para visualisacao do usuario.
 		printf("\n==============================================================\n");
 			
 		}else{
@@ -377,25 +381,54 @@ void backup(){
 		printf("\n==============================================================\n");
 		printf("\tBackup nao realizado ");
 		printf("\n==============================================================\n");		
-	}
-	
-	for(i = 0; i < cont; i++){	
-	
-		printf("\n\tID Usuario...........................................: %i\n", bkp_idUsuario[i] );
-		printf("\tNome.................................................: %s\n", bkp_nome[i]);
-		printf("\tEmail cadastrado.....................................: %s",bkp_eMail[i]);
-		printf("\n\tSexo.................................................: %s\n", bkp_sexo[i]);
-		printf("\tTomou vacina?........................................: ");
+	}else if(x != 0){
+		for(i = 0; i < 1000; i++){
+				idUsuario[i] = bkp_idUsuario[i];
+				strcpy(nome[i],bkp_nome[i]);
+				strcpy(eMail[i],bkp_eMail[i]);
+				strcpy(sexo[i],bkp_sexo[i]);
+				vacina[i]= bkp_vacina[i] ;
+				strcpy(endereco[i],bkp_endereco[i]);
+				altura[i]= bkp_altura[i];
+				x++;/* contador para verificar se existe backup	*/
+		}			
+		printf("\n==============================================================\n");
+		printf("\tBackup Restaurado ");
+		printf("\n==============================================================\n");		
+	}else{
+		printf("\n==============================================================\n");
+		printf("\tNao existe Backup para restauracao, operacao nao realizada ");
+		printf("\n==============================================================\n");
+	}		
 		
-		if(bkp_vacina[i] == 1){
-			printf("SIM\n");
-		}else if(bkp_vacina[i] == 2){
-			printf("NAO\n");
-			}else{
-				printf(" \n");		
-			}	
-		printf("\tEndereco.............................................: %s\n", bkp_endereco[i]);
-		printf("\tAltura...............................................:  %.2f", bkp_altura[i]);
-		printf("\n");		
+	for(i = 0; i < cont; i++){	
+		if(idUsuario[i] != 0 && x != 0 ){			
+			printf("\n\tID Usuario...........................................: %i\n", bkp_idUsuario[i] );
+			printf("\tNome.................................................: %s\n", bkp_nome[i]);
+			printf("\tEmail cadastrado.....................................: %s",bkp_eMail[i]);
+			printf("\n\tSexo.................................................: %s\n", bkp_sexo[i]);
+			printf("\tTomou vacina?........................................: ");
+			
+			if(bkp_vacina[i] == 1){
+				printf("SIM\n");
+			}else if(bkp_vacina[i] == 2){
+				printf("NAO\n");
+				}else{
+					printf(" \n");		
+				}	
+			printf("\tEndereco.............................................: %s\n", bkp_endereco[i]);
+			printf("\tAltura...............................................:  %.2f", bkp_altura[i]);
+			printf("\n");		
+		}
 	}
 }
+
+
+
+
+	
+
+
+
+	
+	
