@@ -127,16 +127,16 @@ system ("cls");
 	int opcao=0;
 	do{
 		system ("cls");
-		printf("\n==============================================================\n");
-		printf("\tSelecione uma opcao: ");
-		printf("\n==============================================================\n");
-		printf(" [1]\tCadastrar Novo Usuario\n");
-		printf(" [2]\tListar Usuarios Cadastrados\n");
-		printf(" [3]\tPesquisar Usuario\n");
-		printf(" [4]\tExcluir Cadastro\n");
-		printf(" [5]\tEditar Cadastro\n");
-		printf(" [6]\tBackup\n");
-		printf(" [7]\tSair\n");
+		printf("\n============================================================================================\n");
+		printf("\t\t\tSelecione uma opcao: ");
+		printf("\n============================================================================================\n");
+		printf(" \t[1]\tCadastrar Novo Usuario\n");
+		printf(" \t[2]\tListar Usuarios Cadastrados\n");
+		printf(" \t[3]\tPesquisar Usuario\n");
+		printf(" \t[4]\tExcluir Cadastro\n");
+		printf(" \t[5]\tEditar Cadastro\n");
+		printf(" \t[6]\tBackup\n");
+		printf(" \t[7]\tSair\n");
 		printf("\nOpcao desejada: ");
 		scanf("%d", &opcao);
 		getchar();
@@ -165,7 +165,6 @@ void cadastrarNome(){
 		printf("Informe seu nome.............................................: ");
    		fgets(nome[i],sizeof(nome[i]), stdin);
 		if (strlen(nome[i])== 1){
-
 			printf("Este campo nao pode ser vazio\n");
 		}
 	}while(strlen(nome[i])== 1);
@@ -273,7 +272,8 @@ void ordenacaoVetor(){
 
 void pesquisar(){
 	
-	int idPesquisado, opcao, resultado=0;
+	int idPesquisado, opcao, resultado=0,identificador = 0;
+	char opcao2[50];
 	do{
 		printf("\nInforme a opcao de pesquisa:\n[1] ID\n[2] EMAIL\n");
 		scanf("%d",&opcao);
@@ -308,8 +308,36 @@ void pesquisar(){
 			}else{
 			printf("Valor nao encontrado\n");	
 			break;			
-		case 2:
-			break;
+		case 2:			
+				printf("Informe o e-mail......................................: ");
+				scanf("%s", opcao2);
+				fflush(stdin);
+				strlwr(opcao2); //função que converte a string para minusculo.
+				for(i=0;i<cont;i++){
+					if(strcmp(opcao2,eMail[i])==0){
+						printf("\n\tID Usuario...........................................: %i\n", idUsuario[i] );
+						printf("\tNome.................................................: %s", nome[i]);
+						printf("\tEmail cadastrado.....................................: %s\n",eMail[i]);
+						printf("\tSexo.................................................: %s\n", sexo[i]);
+						printf("\tTomou vacina?........................................: ");
+					
+						if(vacina[i] == 1){
+							printf("SIM\n");
+							}else{
+							printf("NAO\n");
+							}
+							printf("\tEndereco.............................................: %s", endereco[i]);
+							printf("\tAltura...............................................:  %.2f\n", altura[i]);
+							printf("\n");
+							identificador++;					
+					}
+				}
+					if(identificador==0){
+						printf("Nao Localizado, tente novamente.\n");
+						printf("%s\n", opcao2);
+						printf("%s\n", eMail[i]);
+					}
+					break;
 		}
 	}
 }
@@ -368,19 +396,19 @@ void backup(){
 				bkp_altura[i] = altura[i];
 				x++;/* contador para verificar se existe backup	*/
 		}	
-		printf("\n==============================================================\n");
-		printf("\tBackup realizado com sucesso");//imprime mensagem para visualisacao do usuario.
-		printf("\n==============================================================\n");
+		printf("\n============================================================================================\n");
+		printf("\t\t\tBackup realizado com sucesso");//imprime mensagem para visualisacao do usuario.
+		printf("\n============================================================================================\n");
 			
 		}else{
-			printf("\n==============================================================\n");
-			printf("\tBase de dados vazia, Backup nao realizado ");
-			printf("\n==============================================================\n");			
+			printf("\n============================================================================================\n");
+			printf("\t\t\tBase de dados vazia, Backup nao realizado ");
+			printf("\n============================================================================================\n");			
 		}		
 	}else if (opcao == 2){
-		printf("\n==============================================================\n");
-		printf("\tBackup nao realizado ");
-		printf("\n==============================================================\n");		
+		printf("\n============================================================================================\n");
+		printf("\t\t\tBackup nao realizado ");
+		printf("\n============================================================================================\n");		
 	}else if(x != 0){
 		for(i = 0; i < 1000; i++){
 				idUsuario[i] = bkp_idUsuario[i];
@@ -392,19 +420,20 @@ void backup(){
 				altura[i]= bkp_altura[i];
 				x++;/* contador para verificar se existe backup	*/
 		}			
-		printf("\n==============================================================\n");
-		printf("\tBackup Restaurado ");
-		printf("\n==============================================================\n");		
+		printf("\n============================================================================================\n");
+		printf("\t\t\tBackup Restaurado ");
+		printf("\n============================================================================================\n");		
 	}else{
-		printf("\n==============================================================\n");
-		printf("\tNao existe Backup para restauracao, operacao nao realizada ");
-		printf("\n==============================================================\n");
+		printf("\n============================================================================================\n");
+		printf("\t\t\tNao existe Backup para restauracao, operacao nao realizada ");
+		printf("\n============================================================================================\n");
 	}		
-		
+		printf("\n\tLog:\n", bkp_idUsuario[i]);
 	for(i = 0; i < cont; i++){	
-		if(idUsuario[i] != 0 && x != 0 ){			
-			printf("\n\tID Usuario...........................................: %i\n", bkp_idUsuario[i] );
-			printf("\tNome.................................................: %s\n", bkp_nome[i]);
+		
+		if(idUsuario[i] != 0 && x != 0 ){						
+			printf("\n\tID Usuario...........................................: %i", bkp_idUsuario[i] );
+			/*printf("\tNome.................................................: %s\n", bkp_nome[i]);
 			printf("\tEmail cadastrado.....................................: %s",bkp_eMail[i]);
 			printf("\n\tSexo.................................................: %s\n", bkp_sexo[i]);
 			printf("\tTomou vacina?........................................: ");
@@ -417,10 +446,11 @@ void backup(){
 					printf(" \n");		
 				}	
 			printf("\tEndereco.............................................: %s\n", bkp_endereco[i]);
-			printf("\tAltura...............................................:  %.2f", bkp_altura[i]);
-			printf("\n");		
+			printf("\tAltura...............................................:  %.2f", bkp_altura[i]);*/
+				
 		}
 	}
+	printf("\n\n");
 }
 
 void editar(){
@@ -441,7 +471,9 @@ void editar(){
 			cadastrarEndereco();
 			cadastrarAltura();
 			identificador++;			
-			printf("Cadastro alterado com sucesso");		
+			printf("\n============================================================================================\n");
+			printf("\t\t\tCadastro editado com sucesso");
+			printf("\n============================================================================================\n");		
 		}
 	}
 	if(identificador == 0){
