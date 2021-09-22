@@ -20,6 +20,7 @@ void ordenacaoVetor();
 void cadastrarEndereco();
 void pesquisar();
 void backup();
+void editar();
 int buscaBinariaId(int id[], int tamamnho, int x);
 //int idUsuario[i], int vacina[i],nome[i], eMail[i], sexo[i], endereco[i], altura[i]//
 
@@ -88,7 +89,7 @@ int main(){
 				printf("\n============================================================================================\n");
 				printf("\t\t\tExcluir Usuarios Cadastrados");
 				printf("\n============================================================================================\n");
-					//insira aqui a função excluir//
+					
 			system ("pause");
 			break;
 			case 5:
@@ -96,7 +97,7 @@ int main(){
 				printf("\n============================================================================================\n");
 				printf("\t\t\tEditar Usuarios Cadastrados");
 				printf("\n============================================================================================\n");
-					//insira aqui a função Editar//
+				editar();
 			system ("pause");
 				break;
 			case 6:
@@ -283,7 +284,6 @@ void pesquisar(){
 		}		
 	}while(opcao < 1 || opcao > 2);
 	
-	
 	switch(opcao){
 		case 1:
 			printf("Digite o Id que deseja procurar: ");
@@ -311,8 +311,8 @@ void pesquisar(){
 		case 2:
 			break;
 		}
-		}
 	}
+}
 int buscaBinariaId(int id[1000], int tamanho, int x){
 	int inicio = 0, fim = tamanho - 1, meio;
 	
@@ -423,12 +423,29 @@ void backup(){
 	}
 }
 
-
-
-
+void editar(){
 	
-
-
-
+	int id, identificador=0, opcao=0;	
 	
-	
+	printf("Informe o Id do cadastro a ser editado: ");
+	scanf("%d", &id);
+	fflush(stdin);
+
+	for(i=0; i < cont; i++){
+		
+		if(	idUsuario[i] == id){				
+			cadastrarNome();
+			cadastrarEmail();
+			cadastrarSexo();
+			cadastrarVacina();
+			cadastrarEndereco();
+			cadastrarAltura();
+			identificador++;			
+			printf("Cadastro alterado com sucesso");		
+		}
+	}
+	if(identificador == 0){
+		printf("Id nao foi localizado\n");
+	}
+			
+}
