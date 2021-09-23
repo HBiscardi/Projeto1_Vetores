@@ -21,6 +21,8 @@ void cadastrarEndereco();
 void pesquisar();
 void backup();
 void editar();
+void excluir();
+void excluirId();
 int buscaBinariaId(int id[], int tamamnho, int x);
 //int idUsuario[i], int vacina[i],nome[i], eMail[i], sexo[i], endereco[i], altura[i]//
 
@@ -32,9 +34,11 @@ int main(){
 		switch(opc){
 			case 1:
 				system("cls");
-				printf("\n============================================================================================\n");
-				printf("\t\t\tCadastrar Novo usuario");
-				printf("\n============================================================================================\n");
+				printf("\n XXXXXXX XXXXXXX XXXXXXX XXXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXX");
+				printf("\nX XXXXX X XXXXX                                  X XXXXX X XXXXX X XXX");
+				printf("\nXX XXX XXX XXXX      CADASTRAR NOVO USUARIO      XX XXX XXX XXX XXX XX");
+				printf("\nXXX X XXXXX XXX                                  XXX X XXXXX X XXXXX X");
+				printf("\nXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX \n\n");
 				cadastrarId();
 				cadastrarNome();
 				cadastrarEmail();
@@ -46,30 +50,29 @@ int main(){
 				cont++;
 				printf("\n\t\t\tCadastro realizado com sucesso!!!\n\n");				
 				system("pause");
-				
 				break;
-				
 			case 2:
 					ordenacaoVetor();
 					system("cls");
-					printf("\n============================================================================================\n");
-					printf("\t\t\tUsuarios Cadastrados");
-					printf("\n============================================================================================\n");
+				printf("\n XXXXXXX XXXXXXX XXXXXXX XXXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXX");
+				printf("\nX XXXXX X XXXXX                                  X XXXXX X XXXXX X XXX");
+				printf("\nXX XXX XXX XXXX       USUARIOS CADASTRADOS       XX XXX XXX XXX XXX XX");
+				printf("\nXXX X XXXXX XXX                                  XXX X XXXXX X XXXXX X");
+				printf("\nXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX \n\n");
 				for(i=0;i<cont;i++){
 					if(idUsuario[i]!= 0){
-						printf("\n\tID Usuario...........................................: %i\n", idUsuario[i] );
-						printf("\tNome.................................................: %s", nome[i]);
-						printf("\tEmail cadastrado.....................................: %s\n",eMail[i]);
-						printf("\tSexo.................................................: %s\n", sexo[i]);
-						printf("\tTomou vacina?........................................: ");
-					
+						printf("\tID Usuario.............................................: %i\n",idUsuario[i] );
+						printf("\tNome...................................................: %s\n",nome[i]);
+						printf("\tEmail cadastrado.......................................: %s\n",eMail[i]);
+						printf("\tSexo...................................................: %s\n",sexo[i]);
+						printf("\tTomou vacina?..........................................: ");					
 						if(vacina[i] == 1){
 							printf("SIM\n");
 						}else{
 							printf("NAO\n");
 						}
-						printf("\tEndereco.............................................: %s", endereco[i]);
-						printf("\tAltura...............................................:  %.2f\n", altura[i]);
+						printf("\tEndereco...............................................: %s", endereco[i]);
+						printf("\tAltura.................................................:  %.2f\n", altura[i]);
 						printf("\n");					
 					}					
 				}
@@ -77,35 +80,42 @@ int main(){
 				break;
 			case 3:
 				system("cls");
-				printf("\n============================================================================================\n");
-				printf("\t\t\tPesquisar Usuarios Cadastrados");
-				printf("\n============================================================================================\n");
-				pesquisar();
-						
+				printf("\n XXXXXXX XXXXXXX XXXXXXX XXXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXX");
+				printf("\nX XXXXX X XXXXX                                  X XXXXX X XXXXX X XXX");
+				printf("\nXX XXX XXX XXXX  PESQUISAR USUARIOS CADASTRADOS  XX XXX XXX XXX XXX XX");
+				printf("\nXXX X XXXXX XXX                                  XXX X XXXXX X XXXXX X");
+				printf("\nXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX \n\n");
+				pesquisar();			
 			system ("pause");
 				break;
 			case 4:
 				system("cls");
-				printf("\n============================================================================================\n");
-				printf("\t\t\tExcluir Usuarios Cadastrados");
-				printf("\n============================================================================================\n");
-					
+				printf("\n XXXXXXX XXXXXXX XXXXXXX XXXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXX");
+				printf("\nX XXXXX X XXXXX                                  X XXXXX X XXXXX X XXX");
+				printf("\nXX XXX XXX XXXX   EXCLUIR USUARIOS CADASTRADOS   XX XXX XXX XXX XXX XX");
+				printf("\nXXX X XXXXX XXX                                  XXX X XXXXX X XXXXX X");
+				printf("\nXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX \n\n");
+				excluir();	
 			system ("pause");
 			break;
 			case 5:
 				system("cls");
-				printf("\n============================================================================================\n");
-				printf("\t\t\tEditar Usuarios Cadastrados");
-				printf("\n============================================================================================\n");
+				printf("\n XXXXXXX XXXXXXX XXXXXXX XXXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXX");
+				printf("\nX XXXXX X XXXXX                                  X XXXXX X XXXXX X XXX");
+				printf("\nXX XXX XXX XXXX    EDITAR USUARIOS CADASTRADOS   XX XXX XXX XXX XXX XX");
+				printf("\nXXX X XXXXX XXX                                  XXX X XXXXX X XXXXX X");
+				printf("\nXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX \n\n");
 				editar();
 			system ("pause");
 				break;
 			case 6:
                system("cls");
-				printf("\n============================================================================================\n");
-				printf("\t\t\tRealizar Backup");
-				printf("\n============================================================================================\n");
-					backup();
+                printf("\n XXXXXXX XXXXXXX XXXXXXX XXXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXX");
+				printf("\nX XXXXX X XXXXX                                  X XXXXX X XXXXX X XXX");
+				printf("\nXX XXX XXX XXXX          REALIZAR BACKUP         XX XXX XXX XXX XXX XX");
+				printf("\nXXX X XXXXX XXX                                  XXX X XXXXX X XXXXX X");
+				printf("\nXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX \n\n");
+				backup();
 			system ("pause");
 				break;
 			case 7 :
@@ -127,9 +137,11 @@ system ("cls");
 	int opcao=0;
 	do{
 		system ("cls");
-		printf("\n============================================================================================\n");
-		printf("\t\t\tSelecione uma opcao: ");
-		printf("\n============================================================================================\n");
+		printf("\n XXXXXXX XXXXXXX XXXXXXX XXXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXX");
+		printf("\nX XXXXX X XXXXX                                  X XXXXX X XXXXX X XXX");
+		printf("\nXX XXX XXX XXXX        SELECIONE UMA OPCAO:      XX XXX XXX XXX XXX XX");
+		printf("\nXXX X XXXXX XXX                                  XXX X XXXXX X XXXXX X");
+		printf("\nXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX  \n\n");		
 		printf(" \t[1]\tCadastrar Novo Usuario\n");
 		printf(" \t[2]\tListar Usuarios Cadastrados\n");
 		printf(" \t[3]\tPesquisar Usuario\n");
@@ -291,19 +303,19 @@ void pesquisar(){
 			resultado = buscaBinariaId(idUsuario, cont,idPesquisado);
 			
 			if(resultado != -1){
-				printf("Valor %d foi encontrado na posicao %d que tem o valor %d\n",idPesquisado,resultado, idUsuario[resultado]);
-				printf("\n\tID Usuario...........................................: %i\n", idUsuario[resultado] );
-				printf("\tNome.................................................: %s", nome[resultado]);
-				printf("\tEmail cadastrado.....................................: %s\n",eMail[resultado]);
-				printf("\tSexo.................................................: %s\n", sexo[resultado]);
-				printf("\tTomou vacina?........................................: ");
+				printf("Valor %d foi encontrado na posicao %d que tem o valor %d\n\n",idPesquisado,resultado, idUsuario[resultado]);
+				printf("\tID Usuario.............................................: %i\n", idUsuario[resultado] );
+				printf("\tNome...................................................: %s", nome[resultado]);
+				printf("\tEmail cadastrado.......................................: %s\n",eMail[resultado]);
+				printf("\tSexo...................................................: %s\n", sexo[resultado]);
+				printf("\tTomou vacina?..........................................: ");
 				if(vacina[i] == 1){
 					printf("SIM\n");
 				}else{
 					printf("NAO\n");
 				}
-				printf("\tEndereco.............................................: %s", endereco[resultado]);
-				printf("\tAltura...............................................:  %.2f\n", altura[resultado]);
+				printf("\tEndereco...............................................: %s", endereco[resultado]);
+				printf("\tAltura.................................................:  %.2f\n", altura[resultado]);
 				printf("\n");
 			}else{
 			printf("Valor nao encontrado\n");	
@@ -315,19 +327,19 @@ void pesquisar(){
 				strlwr(opcao2); //função que converte a string para minusculo.
 				for(i=0;i<cont;i++){
 					if(strcmp(opcao2,eMail[i])==0){
-						printf("\n\tID Usuario...........................................: %i\n", idUsuario[i] );
-						printf("\tNome.................................................: %s", nome[i]);
-						printf("\tEmail cadastrado.....................................: %s\n",eMail[i]);
-						printf("\tSexo.................................................: %s\n", sexo[i]);
-						printf("\tTomou vacina?........................................: ");
+						printf("\n\tID Usuario.............................................: %i\n", idUsuario[i] );
+						printf("\tNome...................................................: %s", nome[i]);
+						printf("\tEmail cadastrado.......................................: %s\n",eMail[i]);
+						printf("\tSexo...................................................: %s\n", sexo[i]);
+						printf("\tTomou vacina?..........................................: ");
 					
 						if(vacina[i] == 1){
 							printf("SIM\n");
 							}else{
 							printf("NAO\n");
 							}
-							printf("\tEndereco.............................................: %s", endereco[i]);
-							printf("\tAltura...............................................:  %.2f\n", altura[i]);
+							printf("\tEndereco...............................................: %s", endereco[i]);
+							printf("\tAltura.................................................:  %.2f\n", altura[i]);
 							printf("\n");
 							identificador++;					
 					}
@@ -396,19 +408,13 @@ void backup(){
 				bkp_altura[i] = altura[i];
 				x++;/* contador para verificar se existe backup	*/
 		}	
-		printf("\n============================================================================================\n");
-		printf("\t\t\tBackup realizado com sucesso");//imprime mensagem para visualisacao do usuario.
-		printf("\n============================================================================================\n");
+		printf("\t\t\tBackup realizado com sucesso!");//imprime mensagem para visualizacao do usuario.
 			
 		}else{
-			printf("\n============================================================================================\n");
-			printf("\t\t\tBase de dados vazia, Backup nao realizado ");
-			printf("\n============================================================================================\n");			
+			printf("\t\t\tBase de dados vazia, Backup nao realizado. ");			
 		}		
 	}else if (opcao == 2){
-		printf("\n============================================================================================\n");
-		printf("\t\t\tBackup nao realizado ");
-		printf("\n============================================================================================\n");		
+		printf("\t\t\tBackup nao realizado. ");	
 	}else if(x != 0){
 		for(i = 0; i < 1000; i++){
 				idUsuario[i] = bkp_idUsuario[i];
@@ -420,13 +426,9 @@ void backup(){
 				altura[i]= bkp_altura[i];
 				x++;/* contador para verificar se existe backup	*/
 		}			
-		printf("\n============================================================================================\n");
-		printf("\t\t\tBackup Restaurado ");
-		printf("\n============================================================================================\n");		
+		printf("\t\t\tBackup Restaurado! ");
 	}else{
-		printf("\n============================================================================================\n");
-		printf("\t\t\tNao existe Backup para restauracao, operacao nao realizada ");
-		printf("\n============================================================================================\n");
+		printf("\t\t\tNao existe Backup para restauracao, operacao nao realizada. ");
 	}		
 		printf("\n\tLog:\n", bkp_idUsuario[i]);
 	for(i = 0; i < cont; i++){	
@@ -471,13 +473,41 @@ void editar(){
 			cadastrarEndereco();
 			cadastrarAltura();
 			identificador++;			
-			printf("\n============================================================================================\n");
-			printf("\t\t\tCadastro editado com sucesso");
-			printf("\n============================================================================================\n");		
+			printf("\t\t\tCadastro editado com sucesso!\n\n");		
 		}
 	}
 	if(identificador == 0){
 		printf("Id nao foi localizado\n");
 	}
 			
+}
+
+
+void excluir(){
+	int id, identificador=0, opcao=0;	
+	printf("Informe o Id do cadastro a ser excluido: ");
+	scanf("%d", &id);
+	fflush(stdin);
+	for(i=0; i < cont; i++){
+		if(	idUsuario[i] == id){				
+			excluirId();
+			//cadastrarEmail();
+			//cadastrarSexo();
+			//cadastrarVacina();
+			//cadastrarEndereco();
+			//cadastrarAltura();
+			identificador ++;
+			printf("\t\t\tCadastro excluido com sucesso!\n\n");		
+		}
+	}
+	if(identificador == 0){
+		printf("\t\tId nao foi localizado!\n");
+	}
+			
+}
+
+void excluirId(){
+	int idTemp, idEx = NULL;
+	idUsuario[i] = idEx;
+	//printf("ID Excluido com sucesso!\n");
 }
