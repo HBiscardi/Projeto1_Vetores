@@ -110,7 +110,7 @@ int main(){
 				break;
 			case 6:
                system("cls");
-                printf("\n XXXXXXX XXXXXXX XXXXXXX XXXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXX");
+                		printf("\n XXXXXXX XXXXXXX XXXXXXX XXXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXX");
 				printf("\nX XXXXX X XXXXX                                  X XXXXX X XXXXX X XXX");
 				printf("\nXX XXX XXX XXXX          REALIZAR BACKUP         XX XXX XXX XXX XXX XX");
 				printf("\nXXX X XXXXX XXX                                  XXX X XXXXX X XXXXX X");
